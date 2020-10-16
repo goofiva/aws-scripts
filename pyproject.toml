@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aws-scripts"
+version = "0.1.0"
+description = ""
+authors = ["Va Ha <goofiva@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+boto3 = "^1.15.17"
+termcolor = "^1.1.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
