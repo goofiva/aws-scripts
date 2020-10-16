@@ -2,15 +2,32 @@
 
 ## Prereqs
 
-- [Poetry](https://python-poetry.org/)
+- ####Software
 
-    Python packaging and dependency management
-    
-    osx / linux
-    
-        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+    - [Python 3.9](https://www.python.org/downloads/)
+    - [Poetry](https://python-poetry.org/)
 
-    windows powershell
-    
-        (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python -
+        Python packaging and dependency management
         
+       #### Installation
+        
+        osx / linux
+        
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+    
+        windows powershell
+        
+          (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python -
+
+- ####Initializing 
+    
+      poetry install
+
+## Scripts
+
+- ./bin/modify_instance_user_data.py
+        
+    ###Executing
+    
+      poetry run ./bin/modify_instance_user_data.py -t '{"Name":"foobar-server-name"}' -f ./testing.sh
+    

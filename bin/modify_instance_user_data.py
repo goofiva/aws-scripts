@@ -43,6 +43,10 @@ apply = input(text)
 
 if apply == "yes":
     aws_scripts.ec2.modify_instance_user_data(tags=tags, file_path=file_path, dry_run=False)
+    prod_tags = tags.copy()
+    aws_scripts.ec2.start_instances_by_tags(tags=tags)
+    print('')
     cprint('Done!', 'green')
+    print('')
 else:
     print('Goodbye!')

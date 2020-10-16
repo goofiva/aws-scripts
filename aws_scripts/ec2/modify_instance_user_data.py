@@ -25,17 +25,19 @@ def modify_instance_user_data(tags: list, file_path: str, dry_run: bool=True) ->
         aws_scripts.ec2.stop_instances_by_tags(tags=tags)
 
     for instance in instances:
+        instance_name = aws_scripts.ec2.instance.get_name(instance)
         if dry_run:
             cprint('Found instances with tags (%s)' % str(tags), 'green')
-            instance_name = aws_scripts.ec2.instance.get_name(instance)
             print("    %s  %s" % (instance['InstanceId'], instance_name))
 
         elif not dry_run:
-            instance_name = aws_scripts.ec2.instance.get_name(instance)
-            client.modify_instance_attribute(
+
+            status = client.modify_instance_attribute(
                 InstanceId=instance['InstanceId'],
                 UserData={
-                    'Value': aws_scripts.helpers.encrypt.encode_base64(file_path)
+                    'Value': aws_scripts.helpers.get_file_content(file_path)
+                    # 'Value': aws_scripts.helpers.encrypt.encode_base64(file_path)
                 }
             )
-            print('%s user data changed' % instance_name)
+            print(status)
+            cprint('%s user data changed successful.' % instance_name, 'green')
