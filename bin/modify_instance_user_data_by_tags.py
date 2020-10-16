@@ -32,7 +32,7 @@ if not os.path.isfile(file_path):
 
 
 print('')
-aws_scripts.ec2.modify_instance_user_data(tags=tags, file_path=file_path, dry_run=True)
+aws_scripts.ec2.modify_instance_user_data_by_tags(tags=tags, file_path=file_path, dry_run=True)
 
 print('')
 print('')
@@ -42,7 +42,7 @@ text = colored("To proceed with applying changes type 'yes' or 'no': ", 'magenta
 apply = input(text)
 
 if apply == "yes":
-    aws_scripts.ec2.modify_instance_user_data(tags=tags, file_path=file_path, dry_run=False)
+    aws_scripts.ec2.modify_instance_user_data_by_tags(tags=tags, file_path=file_path, dry_run=False)
     prod_tags = tags.copy()
     aws_scripts.ec2.start_instances_by_tags(tags=tags)
     print('')

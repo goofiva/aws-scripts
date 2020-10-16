@@ -2,12 +2,13 @@ import sys
 from termcolor import cprint
 
 import boto3
+from botocore.exceptions import ClientError
 import aws_scripts
 
 client = boto3.client('ec2')
 
 
-def modify_instance_user_data(tags: list, file_path: str, dry_run: bool=True) -> list:
+def modify_instance_user_data_by_tags(tags: list, file_path: str, dry_run: bool=True) -> list:
     """
 
     :param tags:
@@ -31,6 +32,18 @@ def modify_instance_user_data(tags: list, file_path: str, dry_run: bool=True) ->
             print("    %s  %s" % (instance['InstanceId'], instance_name))
 
         elif not dry_run:
+            try:
+                client.modify_instance_attribute(
+                    InstanceId=instance['InstanceId'],
+                    DryRun=True,
+                    UserData={
+                        'Value': aws_scripts.helpers.get_file_content(file_path)
+                        # 'Value': aws_scripts.helpers.encrypt.encode_base64(file_path)
+                    }
+                )
+            except ClientError as e:
+                if 'DryRunOperation' not in str(e):
+                    raise
 
             status = client.modify_instance_attribute(
                 InstanceId=instance['InstanceId'],
