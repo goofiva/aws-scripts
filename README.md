@@ -2,7 +2,7 @@
 
 ## Prereqs
 
-- ####Software
+- Software
 
     - [Python 3.9](https://www.python.org/downloads/)
     - [Poetry](https://python-poetry.org/)
@@ -19,7 +19,7 @@
         
           (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python -
 
-- ####Initializing 
+- Initializing 
     
       poetry install
 
@@ -27,7 +27,7 @@
 
 - ./bin/modify_instance_user_data.py
         
-    ###Executing
+    Executing
     
       poetry run ./bin/modify_instance_user_data.py -t '{"Name":"foobar-server-name"}' -f ./testing.sh
     
